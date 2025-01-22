@@ -13,6 +13,7 @@ export default function Labs() {
       <h1>Labs</h1>
       <hr/>
       <h2>Carla Delgado</h2>
+      <h3>CS4550 Section 2</h3>
       <hr/>
       <TOC />
       <Routes>
