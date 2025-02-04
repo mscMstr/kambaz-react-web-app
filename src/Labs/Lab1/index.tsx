@@ -89,10 +89,15 @@ tag to tell browsers to render the gaps.
  </tr>
  <tr>
 <td>Q2</td>
-<tr> ... </tr>
  <td>CSS</td>
  <td>2/10/21</td>
  <td>90</td>
+ </tr>
+ <tr>
+<td>Q3</td>
+ <td>JavaScript</td>
+ <td>2/17/21</td>
+ <td>95</td>
  </tr>
  </tbody>
  <tfoot>
