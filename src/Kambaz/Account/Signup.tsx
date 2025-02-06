@@ -8,7 +8,7 @@ export default function Signup() {
         <FormControl placeholder="username" className="wd-username my-2" />
         <FormControl placeholder="password" type="password" className="wd-password my-2" />
         <FormControl placeholder="verify password" type="password" className="wd-password-verify my-2" />
-        <Button href={"/Kambaz/Account/Profile"} className="my-2" style={{ width: "100%" }}>Sign up</Button>
+        <Button href={"/#/Kambaz/Account/Profile"} className="my-2" style={{ width: "100%" }}>Sign up</Button>
       </FormGroup>
       <Link  to="/Kambaz/Account/Signin" >Sign in</Link>
     </div>

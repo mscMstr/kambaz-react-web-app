@@ -16,7 +16,7 @@ export default function Profile() {
             <option value="USER">User</option>       <option value="ADMIN">Admin</option>
             <option value="FACULTY">Faculty</option> <option value="STUDENT">Student</option>
           </FormSelect><br/>
-          <Button href={"/Kambaz/Account/Signin"} style={{ width: "100%" }} type="submit" variant="danger">Sign out</Button>
+          <Button href={"/#/Kambaz/Account/Signin"} style={{ width: "100%" }} type="submit" variant="danger">Sign out</Button>
       </FormGroup>
     </div>
 );}
