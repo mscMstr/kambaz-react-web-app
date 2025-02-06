@@ -7,7 +7,7 @@ export default function Signin() {
       <FormGroup>
         <FormControl placeholder="username" className="wd-username my-2" />
         <FormControl placeholder="password" type="password" className="wd-password my-2" />
-        <Button id="wd-signin-btn" className="my-2" style={{ width: "100%" }} variant="primary" type="submit" href="/Kambaz/Dashboard">
+        <Button id="wd-signin-btn" className="my-2" style={{ width: "100%" }} variant="primary" type="submit" href={"/Kambaz/Dashboard/"}>
           Sign in
         </Button>
       </FormGroup>
