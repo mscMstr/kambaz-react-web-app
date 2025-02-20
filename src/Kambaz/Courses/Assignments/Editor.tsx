@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import * as db from "../../Database";
 
 export default function AssignmentEditor() {
-    const { aid } = useParams();
+    const { cid, aid } = useParams();
     const currentAssignment = db.assignments.find((assignment) => assignment._id == aid);
     console.log("hellow")
     console.log(aid);
@@ -105,8 +105,8 @@ export default function AssignmentEditor() {
 
           <hr />
           <div style={{ textAlign : 'right' }}>
-            <Button type="reset" variant="secondary" className="mx-1">Cancel</Button>
-            <Button type="submit" variant="danger">Save</Button>
+            <Button href={"#/Kambaz/Courses/" + cid + "/Assignments/"} type="reset" variant="secondary" className="mx-1">Cancel</Button>
+            <Button href={"#/Kambaz/Courses/" + cid + "/Assignments/"} type="submit" variant="danger">Save</Button>
           </div>
         </FormGroup>
       </div>
