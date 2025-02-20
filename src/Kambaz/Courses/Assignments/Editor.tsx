@@ -1,15 +1,21 @@
 import { Button, Form, FormControl, FormGroup, FormLabel, FormSelect, Table } from "react-bootstrap";
 // import { MdDateRange } from "react-icons/md";
+import { useParams } from "react-router";
+import * as db from "../../Database";
 
 export default function AssignmentEditor() {
+    const { aid } = useParams();
+    const currentAssignment = db.assignments.find((assignment) => assignment._id == aid);
+    console.log("hellow")
+    console.log(aid);
     return (
       <div id="wd-assignments-editor">
         <FormGroup className="mb-3" controlId="wd-assignments-editor">
           <FormLabel htmlFor="wd-name">Assignment Name</FormLabel>
-          <FormControl id="wd-name" type="text" placeholder="A1" />
+          <FormControl id="wd-name" type="text" value={currentAssignment?.title} placeholder="A1" />
 
           <FormLabel htmlFor="wd-description">Example textarea</FormLabel>
-          <FormControl id="wd-description" as="textarea" rows={3} 
+          <FormControl id="wd-description" as="textarea" rows={3} value={currentAssignment?.description}
             placeholder="The assignment is available online Submit a link to the landing page of your Web application running on Netlify. he landing page should include he following: Your full name and section Links to each of the lab assignments, Link to the Kambaz application, Links to all relevant source code repositories. The Kambaz application should include a link to navigate back to the landing page."/>
 
           <br />
@@ -19,7 +25,7 @@ export default function AssignmentEditor() {
                 <FormLabel htmlFor="wd-points">Points</FormLabel>
               </td>
               <td>
-                <FormControl id="wd-points" type="text" placeholder="100" />
+                <FormControl id="wd-points" type="text" value={currentAssignment?.points} placeholder="100" />
               </td>
             </tr>
             <br/>
@@ -73,7 +79,7 @@ export default function AssignmentEditor() {
                 <FormControl id="wd-assign-to" value={"Everyone"} />
 
                 <FormLabel htmlFor="wd-due-date">Due Date</FormLabel>
-                <FormControl id="wd-due-date" type="date" value="2024-05-13" />
+                <FormControl id="wd-due-date" type="date" value={currentAssignment?.dueDate} placeholder="2024-05-13" />
                 {/* <InputGroup id="wd-due-date" className="mb-3">
                   <FormControl id="wd-due-date" type="date" value="2024-05-13" />
                   <InputGroup.Text>
@@ -85,11 +91,11 @@ export default function AssignmentEditor() {
                   <tr>
                     <td>
                       <FormLabel htmlFor="wd-available-from">Available From</FormLabel>
-                      <FormControl id="wd-available-from" type="date" value="2024-05-06" />
+                      <FormControl id="wd-available-from" type="date" placeholder="2024-05-06" />
                     </td>
                     <td>
                       <FormLabel htmlFor="wd-available-until">Until</FormLabel>
-                      <FormControl id="wd-available-until" type="date" value="2024-05-20" />
+                      <FormControl id="wd-available-until" type="date" value={currentAssignment?.availableDate} placeholder="2024-05-20" />
                     </td>
                   </tr>
                 </Table>
