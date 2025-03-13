@@ -7,6 +7,7 @@ import LessonControlButtons from "../Components/LessonControlButtons";
 import AssignmentControls from "./AssignmentControls";
 import { useParams } from "react-router";
 import * as db from "../../Database";
+import FacultyUser from "../../Account/FacultyUser";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -18,7 +19,7 @@ export default function Assignments() {
       <ListGroup id="wd-modules" className="rounded-0">
         <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
           <div className="wd-assignments-title p-3 ps-2 bg-secondary">
-            <BsGripVertical className="me-2 fs-3" /> 
+            <FacultyUser><BsGripVertical className="me-2 fs-3" /></FacultyUser>
             ASSIGNMENTS 
             <AssignmentControlButtons />
           </div>
@@ -28,7 +29,7 @@ export default function Assignments() {
               .map((assignment: any) => (
               <ListGroup.Item className="wd-lesson list-group-item p-3 ps-1">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <BsGripVertical className="me-2 fs-3" /> 
+                  <FacultyUser><BsGripVertical className="me-2 fs-3" /></FacultyUser>
                   <LuNotebookPen className="text-success me-2 fs-3" /> 
                   <div className="flex-grow-1">
                     <a href={"#/Kambaz/Courses/" + assignment.course + "/Assignments/" + assignment._id}
@@ -40,7 +41,9 @@ export default function Assignments() {
                     <br/>
                     <b>Due</b> {assignment.dueDate} | {assignment.points} pts
                   </div>
-                  <LessonControlButtons />
+                  <FacultyUser>
+                    <LessonControlButtons />
+                  </FacultyUser>
                 </div>
               </ListGroup.Item>
             ))}

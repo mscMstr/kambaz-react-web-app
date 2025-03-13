@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, FormControl, FormGroup, FormLabel, FormSelect, Table } from "react-bootstrap";
 // import { MdDateRange } from "react-icons/md";
 import { useParams } from "react-router";
-import * as db from "../../Database";
+// import * as db from "../../Database";
+import { addAssignment, editAssignment, deleteAssignment }
+  from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();
-    const currentAssignment = db.assignments.find((assignment) => assignment._id == aid);
-    console.log("hellow")
-    console.log(aid);
+    const assignments = useSelector((state: any) => state.assignmentReducer)
+    const currentAssignment = assignments.assignments.find((assignment: any) => assignment._id == aid);
     return (
       <div id="wd-assignments-editor">
         <FormGroup className="mb-3" controlId="wd-assignments-editor">
