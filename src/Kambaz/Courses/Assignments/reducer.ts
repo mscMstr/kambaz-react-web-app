@@ -1,37 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 import { assignments } from "../../Database";
-import { v4 as uuidv4 } from "uuid";
 const initialState = {
   assignments: assignments,
 };
 const assignmentSlice = createSlice({
-  name: "modules",
+  name: "assignments",
   initialState,
   reducers: {
     addAssignment: (state, { payload: assignment }) => {
       const newAssignment: any = {
-        _id: uuidv4(),
-        title: assignment.title,
+        _id: assignment.id,
+        title: "Name new assignment...",
         course: assignment.course,
-        description: assignment.description,
-        points: assignment.points,
-        dueDate: assignment.dueDate,
-        availableDate: assignment.availableDate,
+        description: "Write assignment description...",
+        points: 100,
+        dueDate: "February 28 at 11:59PM",
+        availableDate: "February 28 at 11:59PM",
       };
       state.assignments = [...state.assignments, newAssignment] as any;
     },
     deleteAssignment: (state, { payload: assignmentId }) => {
       state.assignments = state.assignments.filter(
-        (m: any) => m._id !== assignmentId);
+        (a: any) => a._id !== assignmentId);
     },
+    updateAssignment: (state, { payload: assignment }) => {
+        state.assignments = state.assignments.map((a: any) =>
+          a._id === assignment._id ? assignment : a
+        ) as any;
+      },
     editAssignment: (state, { payload: assignmentId }) => {
-      state.assignments = state.assignments.map((m: any) =>
-        m._id === assignmentId ? { ...m, editing: true } : m
+      state.assignments = state.assignments.map((a: any) =>
+        a._id === assignmentId ? { ...a, editing: true } : a
       ) as any;
     },
   },
 });
-export const { addAssignment, deleteAssignment, editAssignment } =
+export const { addAssignment, deleteAssignment, updateAssignment, editAssignment } =
   assignmentSlice.actions;
 export default assignmentSlice.reducer;

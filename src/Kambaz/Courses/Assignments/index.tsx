@@ -2,19 +2,23 @@
 import { ListGroup } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
 import { LuNotebookPen } from "react-icons/lu";
+import { FaTrashAlt } from "react-icons/fa";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import LessonControlButtons from "../Components/LessonControlButtons";
 import AssignmentControls from "./AssignmentControls";
 import { useParams } from "react-router";
-import * as db from "../../Database";
 import FacultyUser from "../../Account/FacultyUser";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentReducer);
+  const dispatch = useDispatch();
+
   return (
     <div>
-      <AssignmentControls /><br /><br /><br /><br />
+      <AssignmentControls dispatch={dispatch} /><br /><br /><br /><br />
 
       <ListGroup id="wd-modules" className="rounded-0">
         <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
@@ -42,6 +46,7 @@ export default function Assignments() {
                     <b>Due</b> {assignment.dueDate} | {assignment.points} pts
                   </div>
                   <FacultyUser>
+                    <button onClick={() => dispatch(deleteAssignment(assignment._id))}><FaTrashAlt /></button>
                     <LessonControlButtons />
                   </FacultyUser>
                 </div>
