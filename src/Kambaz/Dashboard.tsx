@@ -2,18 +2,21 @@
 import { Button, Card, Col, FormControl, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import * as db from "./Database";
 import FacultyUser from "./Account/FacultyUser";
 
 export default function Dashboard(
   { courses, course, setCourse, addNewCourse,
-    deleteCourse, updateCourse }: {
+    deleteCourse, updateCourse, toggleEnrollments,
+    enroll, unenroll }: {
     courses: any[]; course: any; setCourse: (course: any) => void;
     addNewCourse: () => void; deleteCourse: (course: any) => void;
-    updateCourse: () => void; }
+    updateCourse: () => void; toggleEnrollments: () => void; 
+    enroll: (enrollment: any) => void; unenroll: (enrollmentId: any) => void;}
 ) {
+  console.log(enroll)
+  console.log(unenroll)
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = db;
+  const { enrollments, showEnrollments } = useSelector((state: any) => state.enrollmentReducer);
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -26,7 +29,13 @@ export default function Dashboard(
                 onClick={updateCourse} id="wd-update-course-click">
             Update
           </button>
-        </h5><hr /><br />
+        </h5>
+      </FacultyUser>
+      <button className="btn btn-primary float-end"
+              id="wd-enrollment-click"
+              onClick={toggleEnrollments}> Enrollments </button>
+      <hr /><br />
+      <FacultyUser>
         <FormControl value={course.name} className="mb-2"
               onChange={(e) => setCourse({ ...course, name: e.target.value }) } />
         <FormControl value={course.description}
@@ -36,11 +45,11 @@ export default function Dashboard(
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
           {courses.filter((course) =>
-            enrollments.some(
-              (enrollment) =>
+            !showEnrollments ? enrollments.some(
+              (enrollment: any) =>
                 enrollment.user === currentUser._id &&
                 enrollment.course === course._id
-              ))
+              ) : true)
           .map((course) => (
             <Col className="wd-dashboard-course" style={{ width: "300px" }}>
               <Card>
@@ -70,6 +79,12 @@ export default function Dashboard(
                         Edit
                       </Button>
                     </FacultyUser>
+                    {showEnrollments ? 
+                      <Button id="wd-enroll-click" className="float-end"
+                              onClick={enroll}> Enroll </Button> :
+                      <Button id="wd-unenroll-click" className="float-end"
+                              onClick={unenroll}> Unenroll </Button>
+                    }
                   </Card.Body>
                 </Link>
               </Card>
